@@ -9,41 +9,62 @@ namespace jeuDuPlusOuMoins
     class Program
     {
         static void Main(string[] args)
+        {   
+            int i = 0;
+            // La boucle est infini tant qu'on ne rentre pas une des valeurs attendu
+            while(i == 0){      
+                Console.WriteLine("Bienvenue dans le jeu du Plus ou Moins !");
+                Console.WriteLine("1 - Afficher la règles du jeu");
+                Console.WriteLine("2 - Commencer une partie");
+                Console.WriteLine("3 - Quitter le jeu");
+                string input = Console.ReadLine();  // Lit l'option choisi
+            
+                // affichage du menu                          
+                switch (input.ToLower())
+                {
+                    case "1":
+                        i = 1;
+                        regleJeu(args);
+                        break;
+                    case "2":
+                        i = 1;
+                        partie(args);
+                        break;
+                    case "3":
+                        i = 0;
+                        Environment.Exit(1);    // Permet de quitter la console
+                        break;
+                    default:
+                        i = 0;
+                        Console.WriteLine("Entrez le numero correspondant a l'option voulus (1/2/3)");                                               
+                        break;                
+                }
+            }
+        }
+
+        static void regleJeu(string[] args) {
+            Console.WriteLine("Il faut entrer un nombre compris entre 1 et 100, en chiffre pour trouver le nombre mystere");
+            Console.ReadLine();            
+        }
+
+        static void partie(string[] args)
         {
             bool trouve = false;
             Random rand = new Random();
             int nombreSecret = rand.Next(101);
-            int nbrEssai = 0;
-            string menu = "1";
 
-            Console.WriteLine("Bienvenue dans le jeu du Plus ou Moins !");
             Console.WriteLine("Veuillez entrer un nombre compris entre 1 et 100 (inclus).");
-            
-            // Tant que le jeu n'est pas fini 
-            while (!trouve) {
 
-                // affichage du menu
-                if (menu == "1")
-                {
-                    switch (menu)
-                    {
-                        case "Afficher la règles du jeu":
-                            Console.WriteLine("C'est le printemps");
-                            break;
-                        case "Commencer une partie":
-                            Console.WriteLine("C'est l'été");
-                            break;
-                        case "Quitter le jeu":
-                            Console.WriteLine("C'est l'automne");
-                            break;
-                    }
-                }
+            // Tant que le jeu n'est pas fini 
+            while (!trouve)
+            {
 
                 string inputString = Console.ReadLine();
                 int inputNumber;
 
                 // Si la conversion a marché
-                if (int.TryParse(inputString, out inputNumber)) {
+                if (int.TryParse(inputString, out inputNumber))
+                {
                     // Si c'est en dehors des limites
                     if (inputNumber < 0 || inputNumber > 100)
                     {
@@ -69,9 +90,9 @@ namespace jeuDuPlusOuMoins
                         Console.WriteLine("C'est moins.");
                     }
                 }
-                
+
         // Si la conversion n'a pas réussi
-                else 
+                else
                 {
                     Console.WriteLine("Vous devez entrez les nombres en chiffres");
                     Console.WriteLine("Veuillez entrer un nombre compris entre 1 et 100 (inclus).");
